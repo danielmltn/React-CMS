@@ -1,10 +1,12 @@
-import React from 'react';
+import React from 'react'
 import './Promo.css'
 
-const Promo = () => {
-    return (
-        <div className="hello">Hello Promo</div>
-    )
+export interface PromoProps {
+    description: string;
 }
 
-export default Promo
+export const Promo: React.FC<PromoProps> = ({description}) => {
+    return (
+        <div className="hello">{description}</div>
+    )
+}

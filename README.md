@@ -42,3 +42,18 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+
+
+
+React Typescript
+npx create-react-app my-app --template typescript
+
+
+Storybook
+npx sb init
+cd .storybook/config.ts and change 
+const req = require.context("../src", true, /\.stories\.js$/);
+to
+const req = require.context("../src", true, /\.stories\.tsx$/);

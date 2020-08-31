@@ -1,3 +1,33 @@
-.hello {
-    background-color: yellow;
+.promo {
+    display: flex;
+    flex-direction: column;
+}
+
+/* makes the promo appear to pop out on the page */
+.promo--pop {
+    border-radius: 18px;
+    box-shadow: 5px 5px 5px 5px lightgrey;
+}
+
+.promo--text {
+    padding: 12px 16px 16px 16px;
+    font-family: Circular, -apple-system, system-ui, Roboto, "Helvetica Neue", sans-serif;
+}
+
+.promo--title {
+    color: #222222;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 22px;
+}
+
+.promo--description {
+    color: #717171;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 18px;
+}
+
+.promo--image {
+    width: 100%;
 }

@@ -8,9 +8,25 @@ export default {
   component: Promo,
 } as Meta;
 
+// const mediumImage = '/stockimage1.jpg'
+const largeImage = '/blog_image_1.jpg'
+
 const Template: Story<PromoProps> = (args) => <Promo {...args} />;
 
 export const DefaultPromo = Template.bind({});
 DefaultPromo.args = {
-  description: 'Hello Promo'
+  title: 'title here',
+  description: 'Hello Promo',
+  image: {alt: 'test alt', src: largeImage}
+};
+
+export const LongDescriptionShouldWrap = Template.bind({});
+const longDescription = `Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test 
+and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla
+Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla
+Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla Hello this is a test and bla`
+LongDescriptionShouldWrap.args = {
+  title: 'title here',
+  description: longDescription,
+  image: {alt: 'test alt', src: largeImage}
 };

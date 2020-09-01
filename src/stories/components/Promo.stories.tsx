@@ -1,7 +1,7 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
 import { Story, Meta } from '@storybook/react/types-6-0';
-import { Promo, PromoProps, ClickablePromo } from '../../components/Promo/index';
+import { PromoContent, Promo, PromoProps, ClickablePromo } from '../../components/Promo/index';
 
 export default {
   title: 'component/Promo',
@@ -11,7 +11,7 @@ export default {
 // const mediumImage = '/stockimage1.jpg'
 const largeImage = '/blog_image_1.jpg'
 
-const Template: Story<PromoProps> = (args) => <Promo {...args} />;
+const Template: Story<PromoProps> = (args) => <PromoContent {...args} />;
 
 export const DefaultPromo = Template.bind({});
 DefaultPromo.args = {
@@ -32,7 +32,7 @@ LongDescriptionShouldWrap.args = {
 };
 
 
-const promoClick = (args: any) => ClickablePromo(<Promo {...args} />);
+const promoClick = (args: any) => ClickablePromo(<PromoContent {...args} />);
 export const Clickable = (args: any) => promoClick(args);
 Clickable.bind({});
 

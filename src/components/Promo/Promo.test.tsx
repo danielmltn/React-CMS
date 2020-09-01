@@ -37,4 +37,13 @@ describe("Promo", () => {
       </div>
     `);
   });
+
+  // test('should make a promo into a clickable promo', () => {
+  //   const ClickablePromo = (component) => <ClickablePromo {...component} />
+  //   const promoRendered = <Promo title={'test'} description={'descr'} image={{alt: 'test alt', src: largeImage}} />
+  //   const { getByText } = render(ClickablePromo(promoRendered));
+  //   const container = getByText(description).parentElement.parentElement.parentElement;
+  //   expect(container)
+    
+  // })
 });

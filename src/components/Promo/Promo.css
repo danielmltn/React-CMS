@@ -3,10 +3,6 @@
     flex-direction: column;
 }
 
-.promo--clickable:hover {
-    cursor: pointer;
-}
-
 /* makes the promo appear to pop out on the page */
 .promo--pop {
     border-radius: 18px;

@@ -1,5 +1,5 @@
 import React from "react";
-import { Promo } from "./index";
+import { Promo, ClickablePromo, PromoContent } from "./index";
 import { render } from "@testing-library/react";
 
 describe("Promo", () => {
@@ -10,7 +10,7 @@ describe("Promo", () => {
     const { getByText } = render(
       <Promo title={title} description={description} image={image} />
     );
-    const container = getByText(description).parentElement.parentElement;
+    const container = getByText(description)?.parentElement?.parentElement;
     expect(container).toMatchInlineSnapshot(`
       <div
         class="promo"
@@ -38,3 +38,48 @@ describe("Promo", () => {
     `);
   });
 });
+
+describe('ClickablePromo', () => {
+  test("should make a promo into a clickable promo", () => {
+    const promoToClick = (component: any) => ClickablePromo({ href: "https://www.google.com" }, component);
+    const promo = promoToClick(
+      <PromoContent
+        title={"test"}
+        description={"descr"}
+        image={{ alt: "test alt", src: "/blog_image_1.jpg" }}
+      />
+    );
+    const { getByText } = render(promo);
+    const container = getByText("descr")?.parentElement?.parentElement
+      ?.parentElement;
+    expect(container).toMatchInlineSnapshot(`
+      <div
+        class="promo"
+      >
+        <a
+          href="https://www.google.com"
+        >
+          <img
+            alt="test alt"
+            class="promo--image"
+            src="/blog_image_1.jpg"
+          />
+          <div
+            class="promo--text"
+          >
+            <div
+              class="promo--title"
+            >
+              test
+            </div>
+            <div
+              class="promo--description"
+            >
+              descr
+            </div>
+          </div>
+        </a>
+      </div>
+    `);
+  });
+})

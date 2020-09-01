@@ -32,7 +32,7 @@ LongDescriptionShouldWrap.args = {
 };
 
 
-const promoClick = (args: any) => ClickablePromo(<PromoContent {...args} />);
+const promoClick = (args: any) => ClickablePromo({href: 'https://www.google.com'}, <PromoContent {...args} />);
 export const Clickable = (args: any) => promoClick(args);
 Clickable.bind({});
 

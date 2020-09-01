@@ -13,13 +13,14 @@ const BasePromo = ({component}: BasePromoProps) => {
     )
 }
 
+const basePromo = (arg: JSX.Element) => <BasePromo component={arg}/>;
+
 export interface PromoProps {
     title: string;
     description: string;
     image: {alt: string, src: string};
 }
 export const Promo: React.FC<PromoProps> = (props) => {
-    const basePromo = (arg: JSX.Element) => <BasePromo component={arg}/>;
     const promoContent = <PromoContent {...props} />;
     return basePromo(promoContent);
 }
@@ -37,10 +38,9 @@ export const PromoContent: React.FC<PromoProps> = ({title, description, image}) 
     )
 }
 
-export const ClickablePromo: React.FC<JSX.Element> = (component) => {
-    return (
-        <div className="promo promo--clickable">
-            {component}
-        </div>
-    )
+interface ClickablePromoProps {
+    href: string;
+}
+export const ClickablePromo = ({href}: ClickablePromoProps, component: JSX.Element) => {
+    return basePromo(<a href={href}>{component}</a>)
 }

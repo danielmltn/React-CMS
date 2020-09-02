@@ -14,4 +14,13 @@ describe('Login', () => {
         expect(usernameField).toHaveAttribute('type', 'text');
         expect(passwordField).toHaveAttribute('type', 'text');
     })
+
+    test('should direct user to signed in page on successful submit', () => {
+        const { getByLabelText } = render(<Login />);
+        const usernameField = getByLabelText(/username/i);
+        const passwordField = getByLabelText(/password/i);
+
+        expect(usernameField).toHaveAttribute('type', 'text');
+        expect(passwordField).toHaveAttribute('type', 'text');
+    })
 })

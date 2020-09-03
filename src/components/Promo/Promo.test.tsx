@@ -1,6 +1,8 @@
 import React from "react";
-import { Promo, ClickablePromo, PromoContent } from "./index";
 import { render } from "@testing-library/react";
+
+import { Promo, ClickablePromo, PromoContent } from "./index";
+
 
 describe("Promo", () => {
   test("should render a title, description, and image provided into props", () => {

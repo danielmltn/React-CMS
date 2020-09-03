@@ -8,3 +8,8 @@
     width: 50%;
     margin: 10px 0px 10px 0px;
 }
+
+.login .submit--invalid {
+    opacity: 50%;
+    pointer-events: none;
+}

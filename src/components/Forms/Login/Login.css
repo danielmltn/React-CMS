@@ -1,0 +1,19 @@
+.login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login input[type="text"] {
+    width: 50%;
+    margin: 10px 0px 10px 0px;
+}
+
+.login .submit--invalid {
+    opacity: 50%;
+    pointer-events: none;
+}
+
+.error-message {
+    color: red;
+}

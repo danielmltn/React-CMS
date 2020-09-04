@@ -3,7 +3,6 @@ import { render } from "@testing-library/react";
 
 import { Promo, ClickablePromo, PromoContent } from "./index";
 
-
 describe("Promo", () => {
   test("should render a title, description, and image provided into props", () => {
     const title = "Title here";
@@ -16,6 +15,7 @@ describe("Promo", () => {
     expect(container).toMatchInlineSnapshot(`
       <div
         class="promo"
+        style="background: rgb(238, 238, 238); color: rgb(0, 0, 0);"
       >
         <img
           alt="alt info"
@@ -41,9 +41,10 @@ describe("Promo", () => {
   });
 });
 
-describe('ClickablePromo', () => {
+describe("ClickablePromo", () => {
   test("should make a promo into a clickable promo", () => {
-    const promoToClick = (component: any) => ClickablePromo({ href: "https://www.google.com" }, component);
+    const promoToClick = (component: any) =>
+      ClickablePromo({ href: "https://www.google.com" }, component);
     const promo = promoToClick(
       <PromoContent
         title={"test"}
@@ -57,6 +58,7 @@ describe('ClickablePromo', () => {
     expect(container).toMatchInlineSnapshot(`
       <div
         class="promo"
+        style="background: rgb(238, 238, 238); color: rgb(0, 0, 0);"
       >
         <a
           href="https://www.google.com"
@@ -84,4 +86,4 @@ describe('ClickablePromo', () => {
       </div>
     `);
   });
-})
+});

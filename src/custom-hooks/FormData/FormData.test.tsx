@@ -2,26 +2,12 @@ import '@testing-library/jest-dom/extend-expect';
 import React from 'react';
 import { render, fireEvent } from "@testing-library/react";
 
-import {useFormData} from './index'
+import {useFormData, RegisterProps} from './index'
 
 describe('useFormData', () => {
-    test('should return an object with inputs, setInputs function and handleInputChange function', () => {
-        let inputObj = {inputs: {}, setInputs: () => {}, handleInputChange: () => {}}
-        const TestComponent = () => {
-            inputObj = useFormData();
-            return null
-        }
-        render(<TestComponent />)
-
-        const {inputs, setInputs, handleInputChange} = inputObj
-        
-        expect(inputs).not.toBeUndefined();
-        expect(setInputs).not.toBeUndefined();
-        expect(handleInputChange).not.toBeUndefined();
-    })
     test('should update inputs state by handling an input change', () => {
 
-        let inputObj = {inputs: {username: '', password: ''}, setInputs: () => {}, handleInputChange: (e: any) => {console.log('yo')}}
+        let inputObj = {inputs: {username: '', password: ''}, setInputs: () => {}, handleInputChange: (e: any) => {}}
 
         const TestComponent = () => {
             inputObj = useFormData();
@@ -48,7 +34,7 @@ describe('useFormData', () => {
 
     test('should not update inputs state on input change if target object is not present', () => {
 
-        let inputObj = {inputs: {username: '', password: ''}, setInputs: () => {}, handleInputChange: (e: any) => {console.log('yo')}}
+        let inputObj = {inputs: {username: '', password: ''}, setInputs: () => {}, handleInputChange: (e: any) => {}}
 
         const TestComponent = () => {
             inputObj = useFormData();
@@ -70,5 +56,55 @@ describe('useFormData', () => {
         fireEvent.change(passwordField, {value: 'Pass'})
 
         expect(inputObj.inputs).toEqual({});
+    })
+
+    test('should handle the validation onBlur from a field', () => {
+        const usernameRef = {   
+            name: 'username',
+            validation: {
+                message: '',
+                func: () => 'Must enter a valid name'
+            } 
+        }
+        const passwordRef = {   
+            name: 'password',
+            validation: {
+                message: '',
+                func: () => null
+            } 
+        }
+        let inputObj = {inputs: {username: '', password: ''}, setInputs: () => {}, 
+        handleInputChange: (e: any) => {}, handleValidation: (e: any) => {}, 
+        register: (value: RegisterProps) => undefined}
+
+        const TestComponent = () => {
+            inputObj = useFormData();
+            return (
+                <form className="login">
+            <label htmlFor='username'>Username:</label>
+            <input type='text' id='username' name='username' onChange={inputObj.handleInputChange} onBlur={inputObj.handleValidation} ref={inputObj.register(usernameRef)}></input>
+            <span className="error-message"></span>
+
+
+            <label htmlFor='password'>Password:</label>
+            <input type='text' id='password' name='password' onChange={inputObj.handleInputChange} onBlur={inputObj.handleValidation} ref={inputObj.register(passwordRef)}></input>
+            <span className="error-message"></span>
+            
+            <input className="submit--invalid" type='submit' value='Login'></input>
+        </form>
+            )
+        }
+        const { getByText, getByLabelText } = render(<TestComponent />);
+
+        const usernameField = getByLabelText(/username/i)
+        fireEvent.blur(usernameField, {value: 'Dan'})
+
+        const errorElement = getByText(/must enter a valid name/i);
+        expect(errorElement).toBeVisible();
+
+        const passwordField = getByLabelText(/password/i)
+        fireEvent.blur(passwordField, {value: 'Pass'})
+        expect(passwordField.nextElementSibling).not.toBeVisible();
+
     })
 })

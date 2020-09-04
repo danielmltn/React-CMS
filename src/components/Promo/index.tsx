@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import {LightDarkThemeContext} from '../../themes/LightDarkTheme'
 import './Promo.css'
 
 
@@ -6,8 +7,9 @@ export interface BasePromoProps {
     component: JSX.Element;
 }
 const BasePromo = ({component}: BasePromoProps) => {
+    const theme:any = useContext(LightDarkThemeContext)
     return (
-        <div className="promo">
+        <div className="promo" style={{ background: theme.background, color: theme.foreground }}>
            {component}
         </div>
     )

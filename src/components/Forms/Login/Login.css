@@ -13,3 +13,7 @@
     opacity: 50%;
     pointer-events: none;
 }
+
+.error-message {
+    color: red;
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 // also exported from '@storybook/react' if you can deal with breaking changes in 6.1
+import {themes, LightDarkThemeContext} from '../../themes/LightDarkTheme';
 import { Story, Meta } from '@storybook/react/types-6-0';
 import { PromoContent, Promo, PromoProps, ClickablePromo } from '../../components/Promo/index';
 
@@ -11,7 +12,10 @@ export default {
 // const mediumImage = '/stockimage1.jpg'
 const largeImage = '/blog_image_1.jpg'
 
-const Template: Story<PromoProps> = (args) => <PromoContent {...args} />;
+const Template: Story<PromoProps> = (args) => 
+  <LightDarkThemeContext.Provider value={themes.dark}>
+    <Promo {...args} />
+  </LightDarkThemeContext.Provider>;
 
 export const DefaultPromo = Template.bind({});
 DefaultPromo.args = {

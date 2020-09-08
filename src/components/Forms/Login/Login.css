@@ -9,10 +9,10 @@
     margin: 10px 0px 10px 0px;
 }
 
-.login .submit--invalid {
+/* .login .submit--invalid {
     opacity: 50%;
     pointer-events: none;
-}
+} */
 
 .error-message {
     color: red;

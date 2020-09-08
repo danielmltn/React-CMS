@@ -103,8 +103,8 @@ describe('useFormData', () => {
         expect(errorElement).toBeVisible();
 
         const passwordField = getByLabelText(/password/i)
-        fireEvent.blur(passwordField, {value: 'Pass'})
-        expect(passwordField.nextElementSibling).not.toBeVisible();
+        fireEvent.blur(passwordField, {value: 'Tester123!'})
+        expect(passwordField.nextElementSibling?.innerHTML).toEqual('');
 
     })
 })

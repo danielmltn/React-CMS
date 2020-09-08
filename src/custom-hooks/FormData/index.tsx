@@ -22,18 +22,17 @@ export const useFormData = (props: any = {}): any => {
     const handleValidation = (e:any) => {
         const target = e.target
         if (target && target.name) {
-            validateInput(target, inputRefs.current[e.target.name].validation.func)
+            const validationFunc = inputRefs.current[e.target.name].validation.func
+            const invalidMessage = validationFunc(target.value);
+            const errorElement = target.nextElementSibling;
+            toggleErrorMessage(invalidMessage, errorElement)
         }
     }
 
-    const validateInput = (target: any, validationFunc: Function) => {
-        const invalidMessage = validationFunc(target.value);
-        const errorElement = target.nextElementSibling;
+    const toggleErrorMessage = (invalidMessage: string = '', errorElement: any) => {
         if (invalidMessage) {
-            errorElement.hidden = false;
             errorElement.innerHTML = invalidMessage;
         } else {
-            errorElement.hidden = true;
             errorElement.innerHTML = '';
         }
     }
@@ -45,5 +44,26 @@ export const useFormData = (props: any = {}): any => {
         }
     }
 
-    return {inputs, handleInputChange, handleValidation, register};
+    const handleSubmit = (e: any) => {
+        let errorMessage = false;
+        if (e.target) {
+            const formElements = e.target.elements;
+            for(const [, value] of Object.entries(inputRefs.current)) {
+                const entry: any = value;
+                const validationFunc = inputRefs.current[entry.name].validation.func
+                const invalidMessage = validationFunc(inputs[entry.name]);
+                if (invalidMessage) {
+                    errorMessage = true;
+                }
+                const errorElement = formElements[entry.name].nextElementSibling;
+                toggleErrorMessage(invalidMessage, errorElement)
+            }
+
+        }
+        if (errorMessage) {
+            e.preventDefault();
+        }
+    }
+
+    return {inputs, handleInputChange, handleValidation, register, handleSubmit};
 }
